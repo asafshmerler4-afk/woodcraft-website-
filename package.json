@@ -1,0 +1,95 @@
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+
+export default function Navbar({ t, lang, onToggleLang }) {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const isRtl = lang === 'he'
+
+  return (
+    <nav style={{
+      position: 'sticky', top: 0, zIndex: 100,
+      background: 'rgba(245,240,232,0.95)',
+      backdropFilter: 'blur(8px)',
+      borderBottom: '1px solid var(--border)',
+      padding: '0 2rem',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      height: '64px',
+    }}>
+      {/* Logo */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'Georgia, serif', fontSize: '1.15rem', color: 'var(--wood-dark)' }}>
+        <div style={{
+          width: '32px', height: '32px', background: 'var(--wood-dark)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px'
+        }}>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--cream)">
+            <path d="M3 18 L12 4 L21 18 Z M7 18 L12 10 L17 18" />
+          </svg>
+        </div>
+        {t.brand}
+      </div>
+
+      {/* Desktop nav */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="desktop-nav">
+        {[
+          { key: 'nav_kits', label: t.nav_kits },
+          { key: 'nav_workshops', label: t.nav_workshops },
+          { key: 'nav_about', label: t.nav_about },
+        ].map(item => (
+          <a key={item.key} href="#" style={{
+            fontFamily: 'Helvetica Neue, Arial, sans-serif',
+            fontSize: '0.82rem', letterSpacing: '0.06em',
+            color: 'var(--text-mid)', textDecoration: 'none',
+          }}>{item.label}</a>
+        ))}
+        <a href="#" style={{
+          fontFamily: 'Helvetica Neue, Arial, sans-serif',
+          fontSize: '0.78rem', letterSpacing: '0.08em',
+          background: 'var(--wood-dark)', color: 'var(--cream)',
+          padding: '8px 18px', borderRadius: '3px', textDecoration: 'none',
+        }}>{t.nav_cta}</a>
+        <button onClick={onToggleLang} style={{
+          fontFamily: 'Helvetica Neue, Arial, sans-serif',
+          fontSize: '0.75rem', letterSpacing: '0.1em',
+          background: 'none', border: '1px solid var(--border)',
+          color: 'var(--text-mid)', padding: '5px 12px',
+          borderRadius: '3px', cursor: 'pointer',
+        }}>{t.lang_btn}</button>
+      </div>
+
+      {/* Mobile controls */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} className="mobile-nav">
+        <button onClick={onToggleLang} style={{
+          fontFamily: 'Helvetica Neue, Arial, sans-serif',
+          fontSize: '0.75rem', background: 'none',
+          border: '1px solid var(--border)', color: 'var(--text-mid)',
+          padding: '5px 10px', borderRadius: '3px', cursor: 'pointer',
+        }}>{t.lang_btn}</button>
+        <button onClick={() => setMobileOpen(!mobileOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}>
+          {mobileOpen ? <X size={20} color="var(--wood-dark)" /> : <Menu size={20} color="var(--wood-dark)" />}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div style={{
+          position: 'fixed', top: '64px', left: 0, right: 0,
+          background: 'var(--cream)', borderBottom: '1px solid var(--border)',
+          padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem',
+          zIndex: 99,
+        }}>
+          {[t.nav_kits, t.nav_workshops, t.nav_about].map(label => (
+            <a key={label} href="#" style={{
+              fontFamily: 'Helvetica Neue, Arial, sans-serif',
+              fontSize: '1rem', color: 'var(--text-mid)', textDecoration: 'none',
+            }} onClick={() => setMobileOpen(false)}>{label}</a>
+          ))}
+          <a href="#" style={{
+            fontFamily: 'Helvetica Neue, Arial, sans-serif',
+            fontSize: '0.9rem', background: 'var(--wood-dark)', color: 'var(--cream)',
+            padding: '10px 20px', borderRadius: '3px', textDecoration: 'none', textAlign: 'center',
+          }}>{t.nav_cta}</a>
+        </div>
+      )}
+    </nav>
+  )
+}
