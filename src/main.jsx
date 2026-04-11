@@ -1,20 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Navbar from './Navbar.jsx'
-import KitsSection from './KitsSection.jsx'
-import WorkshopsSection from './WorkshopsSection.jsx'
-import Footer from './Footer.jsx'
-import './index.css'
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-white text-right" dir="rtl">
-      <Navbar />
-      <main>
-        <KitsSection />
-        <WorkshopsSection />
-      </main>
-      <Footer />
+    <div style={{ padding: '50px', textAlign: 'center', direction: 'rtl' }}>
+      <h1>האתר של Moku Woodcraft בדרך!</h1>
+      <p>אם אתה רואה את זה, סימן שהחיבור ל-Vercel עובד.</p>
     </div>
   )
 }
