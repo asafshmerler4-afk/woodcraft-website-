@@ -1,25 +1,26 @@
-import { useState } from 'react'
-import { translations } from './translations'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import KitsSection from './components/KitsSection'
-import WorkshopsSection from './components/WorkshopsSection'
-import Footer from './components/Footer'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Navbar from './Navbar.jsx'
+import KitsSection from './KitsSection.jsx'
+import WorkshopsSection from './WorkshopsSection.jsx'
+import Footer from './Footer.jsx'
+import './index.css'
 
-export default function App() {
-  const [lang, setLang] = useState('he')
-  const t = translations[lang]
-  const isRtl = lang === 'he'
-
-  const toggleLang = () => setLang(prev => prev === 'he' ? 'en' : 'he')
-
+const App = () => {
   return (
-    <div dir={isRtl ? 'rtl' : 'ltr'} style={{ minHeight: '100vh' }}>
-      <Navbar t={t} lang={lang} onToggleLang={toggleLang} />
-      <Hero t={t} />
-      <KitsSection t={t} />
-      <WorkshopsSection t={t} />
-      <Footer t={t} />
+    <div className="min-h-screen bg-white text-right" dir="rtl">
+      <Navbar />
+      <main>
+        <KitsSection />
+        <WorkshopsSection />
+      </main>
+      <Footer />
     </div>
   )
 }
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
