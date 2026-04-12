@@ -1,71 +1,67 @@
-export default function Footer({ t }) {
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <footer style={{ background: 'var(--text-dark)', color: 'var(--cream)', padding: '3.5rem 2rem' }}>
-      <div style={{
-        maxWidth: '1080px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-        gap: '3rem', paddingBottom: '2.5rem',
-        borderBottom: '1px solid rgba(245,240,232,0.1)',
-      }}>
-        {/* Brand */}
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'Georgia, serif', fontSize: '1.15rem', color: 'var(--cream)' }}>
-            <div style={{ width: '32px', height: '32px', background: 'var(--wood-mid)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }}>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--cream)">
-                <path d="M3 18 L12 4 L21 18 Z M7 18 L12 10 L17 18" />
-              </svg>
-            </div>
-            {t.brand}
-          </div>
-          <p style={{
-            fontFamily: 'Helvetica Neue, Arial, sans-serif',
-            fontSize: '0.85rem', lineHeight: 1.7, color: 'rgba(245,240,232,0.5)',
-            marginTop: '1rem', maxWidth: '300px',
-          }}>{t.footer_desc}</p>
+    <nav style={{
+      position: 'sticky', top: 0, zIndex: 100,
+      background: 'rgba(250,247,242,0.95)',
+      backdropFilter: 'blur(8px)',
+      borderBottom: '1px solid rgba(90,70,50,0.15)',
+      padding: '0 2rem', height: '64px',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{
+          width: '36px', height: '36px', background: 'var(--wood-dark)',
+          borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--cream)">
+            <path d="M3 18 L12 4 L21 18 Z M7 18 L12 10 L17 18" />
+          </svg>
         </div>
-
-        {/* Nav links */}
-        <div>
-          <div style={{
-            fontFamily: 'Helvetica Neue, Arial, sans-serif',
-            fontSize: '0.7rem', letterSpacing: '0.15em',
-            color: 'rgba(245,240,232,0.4)', marginBottom: '1.2rem',
-          }}>{t.footer_nav_title}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-            {[t.nav_kits, t.nav_workshops, t.nav_about, t.footer_stockists].map(label => (
-              <a key={label} href="#" style={{
-                fontFamily: 'Helvetica Neue, Arial, sans-serif',
-                fontSize: '0.85rem', color: 'rgba(245,240,232,0.65)', textDecoration: 'none',
-              }}>{label}</a>
-            ))}
-          </div>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <div style={{
-            fontFamily: 'Helvetica Neue, Arial, sans-serif',
-            fontSize: '0.7rem', letterSpacing: '0.15em',
-            color: 'rgba(245,240,232,0.4)', marginBottom: '1.2rem',
-          }}>{t.footer_contact_title}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-            {[t.footer_email, t.footer_phone, t.footer_city].map(info => (
-              <a key={info} href="#" style={{
-                fontFamily: 'Helvetica Neue, Arial, sans-serif',
-                fontSize: '0.85rem', color: 'rgba(245,240,232,0.65)', textDecoration: 'none',
-              }}>{info}</a>
-            ))}
-          </div>
-        </div>
+        <span style={{ fontFamily: 'Georgia, serif', fontSize: '1.1rem', color: 'var(--wood-dark)', fontWeight: 600 }}>
+          סדנת העץ של כהן
+        </span>
       </div>
 
-      <div style={{
-        maxWidth: '1080px', margin: '2rem auto 0',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem',
-      }}>
-        <div style={{ fontFamily: 'Helvetica Neue, Arial, sans-serif', fontSize: '0.75rem', color: 'rgba(245,240,232,0.3)' }}>{t.footer_copy}</div>
-        <div style={{ fontFamily: 'Helvetica Neue, Arial, sans-serif', fontSize: '0.75rem', color: 'rgba(245,240,232,0.3)' }}>{t.footer_tagline}</div>
+      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} className="desktop-nav">
+        {['מוצרים', 'סדנאות', 'אודות', 'צור קשר'].map(item => (
+          <a key={item} href="#" style={{
+            fontSize: '0.9rem', color: 'var(--text-mid)',
+            textDecoration: 'none', transition: 'color 0.2s',
+          }}
+            onMouseEnter={e => e.target.style.color = 'var(--wood-mid)'}
+            onMouseLeave={e => e.target.style.color = 'var(--text-mid)'}
+          >{item}</a>
+        ))}
+        <a href="#workshops" style={{
+          background: 'var(--green)', color: 'var(--cream)',
+          padding: '8px 20px', borderRadius: '4px',
+          textDecoration: 'none', fontSize: '0.85rem',
+        }}>הרשמה לסדנה</a>
       </div>
-    </footer>
+
+      <button onClick={() => setOpen(!open)}
+        style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'none' }}
+        className="mobile-menu-btn">
+        {open ? <X size={22} /> : <Menu size={22} />}
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'fixed', top: '64px', right: 0, left: 0,
+          background: 'var(--cream)', borderBottom: '1px solid rgba(90,70,50,0.15)',
+          padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1rem',
+        }}>
+          {['מוצרים', 'סדנאות', 'אודות', 'צור קשר'].map(item => (
+            <a key={item} href="#" style={{ fontSize: '1rem', color: 'var(--text-mid)', textDecoration: 'none' }}
+              onClick={() => setOpen(false)}>{item}</a>
+          ))}
+        </div>
+      )}
+    </nav>
   )
 }
