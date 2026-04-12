@@ -35,7 +35,7 @@ export default function Hero() {
           fontSize: '1.1rem', lineHeight: 1.8,
           color: 'var(--text-mid)', maxWidth: '520px', marginBottom: '2.5rem',
         }}>
-          ערכות נגרות בעבודת יד, סדנאות מקצועיות, ורהיטים מותאמים אישית. כל פריט נוצר מאהבה לעץ ולמלאכה.
+          ערכות נגרות לבנייה עצמאית, סדנאות מקצועיות, ורהיטים מותאמים אישית. .
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
