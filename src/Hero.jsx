@@ -25,7 +25,7 @@ export default function Hero() {
           textTransform: 'uppercase',
         }}>מלאכת יד ישראלית מסורתית</p>
 
-     <h1 style={{
+<h1 style={{
   fontFamily: "'Assistant', sans-serif",
   fontSize: 'clamp(2.5rem, 6vw, 5rem)',
   fontWeight: 700,
@@ -35,7 +35,7 @@ export default function Hero() {
 }}>
   סדנת העץ של כהן
 </h1>
-
+        
       {/* כפתור גלילה — בין 80% ל-90% */}
       <div style={{
         position: 'absolute',
