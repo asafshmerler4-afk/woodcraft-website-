@@ -23,7 +23,7 @@ export default function Hero() {
           color: 'var(--wood-mid)',
           marginBottom: '1.5rem',
           textTransform: 'uppercase',
-        }}>מלאכת יד ישראלית מסורתית</p>
+        }}>נגרות ישראלית מסורתית</p>
 
         <h1 style={{
           fontFamily: "'Platypi', serif",
